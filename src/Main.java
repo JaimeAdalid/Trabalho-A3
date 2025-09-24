@@ -11,43 +11,41 @@ public class Main {
     public static void main(String[] args) {
 
 
-        int counter = 1;
-        boolean finishedPersonsRegister = false;
-        int userInput = 0;
+        int counter = 1; // Variável utilizada para ajudar a contar e exibir informações para o usuário
+        int userInput = 0; // Variável que é reutilizada em vários momentos para armazenar o input do usuário
 
-        String tempName = ""; // variavel temporaria para quando for instanciar um objeto
+        String tempName = ""; // Variável temporaria para quando for instanciar um objeto que precisa de um nome
 
 
         System.out.println("Bem vindo ao gerenciador de projetos");
         System.out.println("O primeiro passo é cadastrar todos os funcionários envolvidos nos projetos");
         System.out.println("quantas pessoas você gostaria de cadastrar?");
-        Scanner scanner = new Scanner(System.in);
-        userInput = scanner.nextInt();
-        scanner.nextLine();
+        Scanner scanner = new Scanner(System.in); //Objeto que permite ler entrada de dados
+        userInput = scanner.nextInt(); //Leitura de um int inserido pelo usuário
+        scanner.nextLine(); // Serve para ler a próxima linha, mas nesse caso foi incluido para evitar um bug conhecido quando utilizado Scanner para ler um int e em seguida uma string
 
         for (int i = 0; i < userInput; i++) {
             System.out.println("Por favor, informe o nome do " + counter + "º funcionário");
-            counter++;
+            counter++; //aumentando o contador após um iteração do laço for
 
-            tempName = scanner.nextLine();
+            tempName = scanner.nextLine(); //alocando o nome na variavel auxiliar
 
-            Administrator administrator = new Administrator(tempName);
-            persons.add(administrator);
+            Administrator administrator = new Administrator(tempName); // Instanciando um objeto da classe administador e incluindo a varivel auxiliar de nome como parametro para o objeto
+            persons.add(administrator); //adicionando o objeto recem criado a uma arraylist que será utilizada posteriormente
 
-            //System.out.println(persons.get(i).completeName);
         }
 
-        counter = 1;
+        counter = 1; // retornando o contador de volta ao 1 para ser reutilizado depois
         System.out.println("Agora vamos cadastrar os projetos, quantos projetos você quer cadastrar?");
         userInput = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine(); // relembrando que esse leitor é apenas para evitar um bug
 
         for (int i = 0; i < userInput; i++) {
             System.out.println("Por favor, informe o nome do " + counter + "º projeto");
             counter++;
             tempName = scanner.nextLine();
 
-            Project project = new Project(tempName);
+            Project project = new Project(tempName); //similar ao que foi feito para o objeto administrador, utilizando a variável auxiliar de nova como parâmetro instanciamos um novo objeto de projeto
             projects.add(project);
 
         }
@@ -70,22 +68,21 @@ public class Main {
 
 
             for (int j = 0; j < persons.size(); j++){
-                int moreReadableCounter = 0;
-                moreReadableCounter += j + 1;
+                int moreReadableCounter = 0; // novamente uma variavel apenas para tornar as coisas mais legiveis
+                moreReadableCounter += j + 1; // aqui aumentamos a variavel em 1, já que o Java sempre começa a contar do 0 podendo causar algumas confusões
                 System.out.println(moreReadableCounter + ": " + persons.get(j).getCompleteName());
             }
 
             System.out.println("Digite o numero do funcionario que você deseja adicionar a equipe");
             userInput = scanner.nextInt();
-            userInput -=1;
+            userInput -=1; // considerando que alteriormente aumentados o valor em 1 para tornar mais legivel, agora reduzimos esse valor para o código ser coerente
             teams.get(i).AddMember(persons.get(userInput));
             scanner.nextLine();
 
         }
 
+        scanner.close(); // Fechando o scanner, não é algo necessário, mas é um bom habito para evitar consumir recursos desnecessários em programas mais complexos
         System.out.println("Programa terminado");
-
-        scanner.close();
     }
 
 }

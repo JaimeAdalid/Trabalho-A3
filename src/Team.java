@@ -11,8 +11,8 @@ public class Team {
         members = new ArrayList<>();
     }
 
+
     public void AddMember (Person person) {
         members.add(person);
-       //System.out.println("DEBUG: adicionado " + person.getCompleteName() + " a lista");
     }
 }
