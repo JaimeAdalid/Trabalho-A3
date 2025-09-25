@@ -3,32 +3,46 @@ import java.util.Scanner;
 
 public class Main {
 
-    static ArrayList<Person> persons = new ArrayList<>();
-    static ArrayList<Project> projects = new ArrayList<>();
-    static ArrayList<Team> teams = new ArrayList<>();
+
 
 
     public static void main(String[] args) {
 
+        ArrayList<Person> persons = new ArrayList<>();
+        ArrayList<Project> projects = new ArrayList<>();
+        ArrayList<Team> teams = new ArrayList<>();
 
-        int counter = 1; // Variável utilizada para ajudar a contar e exibir informações para o usuário
-        int userInput = 0; // Variável que é reutilizada em vários momentos para armazenar o input do usuário
+        ProgramIntroduction();
+
+        RegisterNewPerson(persons);
+
+        RegisterNewProject(projects);
+
+        RegisterNewTeam(teams, persons);
+
+        System.out.println("Programa terminado");
+    }
+
+    public static void ProgramIntroduction() {
+
+        int userInput = 0;
+        System.out.println("Bem vindo ao gerenciador de projetos");
+        System.out.println("O primeiro passo é cadastrar todos os funcionários envolvidos nos projetos");
+
+    }
+
+    public static void RegisterNewPerson(ArrayList<Person> persons) {
 
         String tempName = ""; // Variável temporaria para quando for instanciar um objeto que precisa de um nome
         String tempCPF = "";
         String tempEmail = "";
         String tempLogin = "";
         String tempPassword = "";
-        String tempDescription = "";
-        String tempStartDate = "";
-        String tempEndDate = "";
-        String tempStatus = "";
-
-
-        System.out.println("Bem vindo ao gerenciador de projetos");
-        System.out.println("O primeiro passo é cadastrar todos os funcionários envolvidos nos projetos");
-        System.out.println("quantas pessoas você gostaria de cadastrar?");
+        int counter = 1;
+        int userInput = 0;
         Scanner scanner = new Scanner(System.in); //Objeto que permite ler entrada de dados
+
+        System.out.println("quantas pessoas você gostaria de cadastrar?");
         userInput = scanner.nextInt(); //Leitura de um int inserido pelo usuário
         scanner.nextLine(); // Serve para ler a próxima linha, mas nesse caso foi incluido para evitar um bug conhecido quando utilizado Scanner para ler um int e em seguida uma string
 
@@ -57,7 +71,20 @@ public class Main {
 
         }
 
-        counter = 1; // retornando o contador de volta ao 1 para ser reutilizado depois
+    }
+
+    public static void RegisterNewProject(ArrayList<Project> projects){
+
+        Scanner scanner = new Scanner(System.in);
+        int userInput = 0;
+        int counter = 1;
+
+        String tempName = ""; // Variável temporaria para quando for instanciar um objeto que precisa de um nome
+        String tempDescription = "";
+        String tempStartDate = "";
+        String tempEndDate = "";
+        String tempStatus = "";
+
         System.out.println("Agora vamos cadastrar os projetos, quantos projetos você quer cadastrar?");
         userInput = scanner.nextInt();
         scanner.nextLine(); // relembrando que esse leitor é apenas para evitar um bug
@@ -85,8 +112,13 @@ public class Main {
             projects.add(project);
 
         }
+    }
 
-        counter = 1;
+    public static void RegisterNewTeam(ArrayList<Team> teams, ArrayList<Person> persons){
+        Scanner scanner = new Scanner(System.in);
+        int counter = 1;
+        int userInput = 0;
+        String tempName = "";
 
         System.out.println("Agora vamos criar novas equipes, quantas equipes você deseja criar?");
         userInput = scanner.nextInt();
@@ -116,9 +148,6 @@ public class Main {
             scanner.nextLine();
 
         }
-
-        scanner.close(); // Fechando o scanner, não é algo necessário, mas é um bom habito para evitar consumir recursos desnecessários em programas mais complexos
-        System.out.println("Programa terminado");
     }
 
 }
