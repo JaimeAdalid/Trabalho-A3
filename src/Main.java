@@ -132,22 +132,42 @@ public class Main {
             Team team = new Team(tempName);
             teams.add(team);
 
-            System.out.println("Agora vamos adicionar pessoas as equipes, veja a lista abaixo");
+            RegisterPersonOnTeams(i, teams, persons);
 
-
-            for (int j = 0; j < persons.size(); j++){
-                int moreReadableCounter = 0; // novamente uma variavel apenas para tornar as coisas mais legiveis
-                moreReadableCounter += j + 1; // aqui aumentamos a variavel em 1, já que o Java sempre começa a contar do 0 podendo causar algumas confusões
-                System.out.println(moreReadableCounter + ": " + persons.get(j).getCompleteName());
-            }
-
-            System.out.println("Digite o numero do funcionario que você deseja adicionar a equipe");
-            userInput = scanner.nextInt();
-            userInput -=1; // considerando que alteriormente aumentados o valor em 1 para tornar mais legivel, agora reduzimos esse valor para o código ser coerente
-            teams.get(i).AddMember(persons.get(userInput));
-            scanner.nextLine();
 
         }
+    }
+
+    public static void RegisterPersonOnTeams(int i, ArrayList<Team> teams, ArrayList<Person> persons){
+        int userInput = 0;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Vamos adicionar pessoas as equipes, veja a lista abaixo");
+
+
+        for (int j = 0; j < persons.size(); j++){
+            int moreReadableCounter = 0; // novamente uma variavel apenas para tornar as coisas mais legiveis
+            moreReadableCounter += j + 1; // aqui aumentamos a variavel em 1, já que o Java sempre começa a contar do 0 podendo causar algumas confusões
+            System.out.println(moreReadableCounter + ": " + persons.get(j).getCompleteName());
+        }
+
+        System.out.println("Digite o numero do funcionario que você deseja adicionar a equipe");
+        userInput = scanner.nextInt();
+        userInput -=1; // considerando que anteriormente aumentados o valor em 1 para tornar mais legivel, agora reduzimos esse valor para o código ser coerente
+        teams.get(i).AddMember(persons.get(userInput));
+        scanner.nextLine();
+        boolean continueLoop = true;
+        while (continueLoop) {
+            System.out.println("Gostaria de cadastrar mais pessoas a equipe? (s/n)");
+            String choice = scanner.nextLine();
+            if (choice.equals("s")) {
+                continueLoop = false;
+                RegisterPersonOnTeams(i, teams, persons);
+            } else{
+                continueLoop = false;
+            }
+        }
+
     }
 
 }
