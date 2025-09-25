@@ -15,6 +15,14 @@ public class Main {
         int userInput = 0; // Variável que é reutilizada em vários momentos para armazenar o input do usuário
 
         String tempName = ""; // Variável temporaria para quando for instanciar um objeto que precisa de um nome
+        String tempCPF = "";
+        String tempEmail = "";
+        String tempLogin = "";
+        String tempPassword = "";
+        String tempDescription = "";
+        String tempStartDate = "";
+        String tempEndDate = "";
+        String tempStatus = "";
 
 
         System.out.println("Bem vindo ao gerenciador de projetos");
@@ -25,12 +33,26 @@ public class Main {
         scanner.nextLine(); // Serve para ler a próxima linha, mas nesse caso foi incluido para evitar um bug conhecido quando utilizado Scanner para ler um int e em seguida uma string
 
         for (int i = 0; i < userInput; i++) {
-            System.out.println("Por favor, informe o nome do " + counter + "º funcionário");
+            System.out.println("Por favor, informe alguns dados do " + counter + "º funcionário");
             counter++; //aumentando o contador após um iteração do laço for
 
+            System.out.println("Nome Completo: ");
             tempName = scanner.nextLine(); //alocando o nome na variavel auxiliar
 
-            Administrator administrator = new Administrator(tempName); // Instanciando um objeto da classe administador e incluindo a varivel auxiliar de nome como parametro para o objeto
+            System.out.println("CPF: ");
+            tempCPF = scanner.nextLine();
+
+            System.out.println("Email: ");
+            tempEmail = scanner.nextLine();
+
+            System.out.println("Login: ");
+            tempLogin = scanner.nextLine();
+
+            System.out.println("Password: ");
+            tempPassword = scanner.nextLine();
+
+
+            Administrator administrator = new Administrator(tempName, tempCPF, tempEmail, tempLogin, tempPassword); // Instanciando um objeto da classe administador e incluindo a varivel auxiliar de nome como parametro para o objeto
             persons.add(administrator); //adicionando o objeto recem criado a uma arraylist que será utilizada posteriormente
 
         }
@@ -41,11 +63,25 @@ public class Main {
         scanner.nextLine(); // relembrando que esse leitor é apenas para evitar um bug
 
         for (int i = 0; i < userInput; i++) {
-            System.out.println("Por favor, informe o nome do " + counter + "º projeto");
+            System.out.println("Por favor, informe alguns dados do " + counter + "º projeto");
             counter++;
+
+            System.out.println("Nome do projeto: ");
             tempName = scanner.nextLine();
 
-            Project project = new Project(tempName); //similar ao que foi feito para o objeto administrador, utilizando a variável auxiliar de nova como parâmetro instanciamos um novo objeto de projeto
+            System.out.println("Descrição do projeto: ");
+            tempDescription = scanner.nextLine();
+
+            System.out.println("Data de inicio: ");
+            tempStartDate = scanner.nextLine();
+
+            System.out.println("Data de termino prevista : ");
+            tempEndDate = scanner.nextLine();
+
+            System.out.println("Status do projeto: ");
+            tempStatus = scanner.nextLine();
+
+            Project project = new Project(tempName, tempDescription, tempStartDate, tempEndDate, tempStatus); //similar ao que foi feito para o objeto administrador, utilizando a variável auxiliar de nova como parâmetro instanciamos um novo objeto de projeto
             projects.add(project);
 
         }

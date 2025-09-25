@@ -1,16 +1,20 @@
-// classe pessoa que servirá como base para as classes administrador, gerente e colborador herderam posteriormente
+// classe pessoa que servirá como base para as classes administrador, gerente e colaborador que a herdarão posteriormente
 public class Person {
 
     // atributos necessários para a classe
-    String completeName;
-    String CPF;
-    String email;
-    String role;
-    String login;
-    String password;
+    private String completeName;
+    private String CPF;
+    private String email;
+    private String role;
+    private String login;
+    private String password;
 
-    Person(String completeName) {
+    Person(String completeName, String CPF, String email, String login, String password) {
         this.completeName = completeName;
+        this.CPF = CPF;
+        this.email = email;
+        this.login = login;
+        this.password = password;
 
     }
 
