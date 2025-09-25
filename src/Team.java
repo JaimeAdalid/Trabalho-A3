@@ -6,13 +6,21 @@ public class Team {
     String description;
     ArrayList<Person> members;
 
-    public Team(String teamName) {
+    public Team(String teamName, String description) {
         this.teamName = teamName;
+        this.description = description;
         members = new ArrayList<>();
     }
 
 
     public void AddMember (Person person) {
         members.add(person);
+    }
+
+    public String getTeamName() {return teamName;}
+    public String getDescription() {return description;}
+
+    public ArrayList<Person> getMembers() {
+        return members;
     }
 }

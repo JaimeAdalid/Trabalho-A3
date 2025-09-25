@@ -15,7 +15,6 @@ public class Person {
         this.email = email;
         this.login = login;
         this.password = password;
-
     }
 
     public String getCompleteName() {
@@ -24,5 +23,13 @@ public class Person {
     public void setCompleteName(String completeName) {
         this.completeName = completeName;
     }
+
+    public String getCPF() {return CPF;}
+
+    public String getEmail() {return email;}
+
+    public String getLogin() {return login;}
+    
+    public String getPassword() {return password;}
 
 }

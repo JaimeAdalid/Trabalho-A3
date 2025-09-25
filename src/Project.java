@@ -17,6 +17,12 @@ public class Project {
 
     }
 
+    public String getProjectName() {return projectName;}
+    public String getDescription() {return description;}
+    public String getStartDate() {return startDate;}
+    public String getEndDate() {return endDate;}
+    public String getStatus() {return status;}
+
 
 
 }

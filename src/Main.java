@@ -20,6 +20,8 @@ public class Main {
 
         RegisterNewTeam(teams, persons);
 
+        ShowAllInfo(persons, projects, teams);
+
         System.out.println("Programa terminado");
     }
 
@@ -43,7 +45,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in); //Objeto que permite ler entrada de dados
 
         System.out.println("quantas pessoas você gostaria de cadastrar?");
-        userInput = scanner.nextInt(); //Leitura de um int inserido pelo usuário
+
+        try {
+            userInput = scanner.nextInt(); //Leitura de um int inserido pelo usuário
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         scanner.nextLine(); // Serve para ler a próxima linha, mas nesse caso foi incluido para evitar um bug conhecido quando utilizado Scanner para ler um int e em seguida uma string
 
         for (int i = 0; i < userInput; i++) {
@@ -65,10 +73,30 @@ public class Main {
             System.out.println("Password: ");
             tempPassword = scanner.nextLine();
 
+            int roleSelector = 0;
+            System.out.println("Por favor digite o numero referente ao cargo do funcionário: ");
+            System.out.println("1-Administrador");
+            System.out.println("2-Gerente");
+            System.out.println("3-Colaborador");
+            roleSelector = scanner.nextInt();
 
-            Administrator administrator = new Administrator(tempName, tempCPF, tempEmail, tempLogin, tempPassword); // Instanciando um objeto da classe administador e incluindo a varivel auxiliar de nome como parametro para o objeto
-            persons.add(administrator); //adicionando o objeto recem criado a uma arraylist que será utilizada posteriormente
+            switch (roleSelector){
+                case 1:
+                    Administrator administrator = new Administrator(tempName, tempCPF, tempEmail, tempLogin, tempPassword);
+                    persons.add(administrator);
+                    break;
 
+                case 2:
+                    Manager manager = new Manager(tempName, tempCPF, tempEmail, tempLogin, tempPassword);
+                    persons.add(manager);
+                    break;
+
+                case 3:
+                    Collaborator collaborator = new Collaborator(tempName, tempCPF, tempEmail, tempLogin, tempPassword);
+                    persons.add(collaborator);
+                    break;
+            }
+            scanner.nextLine();
         }
 
     }
@@ -110,8 +138,9 @@ public class Main {
 
             Project project = new Project(tempName, tempDescription, tempStartDate, tempEndDate, tempStatus); //similar ao que foi feito para o objeto administrador, utilizando a variável auxiliar de nova como parâmetro instanciamos um novo objeto de projeto
             projects.add(project);
-
+            System.out.println("");
         }
+        System.out.println("");
     }
 
     public static void RegisterNewTeam(ArrayList<Team> teams, ArrayList<Person> persons){
@@ -119,6 +148,7 @@ public class Main {
         int counter = 1;
         int userInput = 0;
         String tempName = "";
+        String tempDescription = "";
 
         System.out.println("Agora vamos criar novas equipes, quantas equipes você deseja criar?");
         userInput = scanner.nextInt();
@@ -129,7 +159,10 @@ public class Main {
             counter++;
             tempName = scanner.nextLine();
 
-            Team team = new Team(tempName);
+            System.out.println("Agora informe a descrição");
+            tempDescription = scanner.nextLine();
+
+            Team team = new Team(tempName, tempDescription);
             teams.add(team);
 
             RegisterPersonOnTeams(i, teams, persons);
@@ -141,6 +174,7 @@ public class Main {
     public static void RegisterPersonOnTeams(int i, ArrayList<Team> teams, ArrayList<Person> persons){
         int userInput = 0;
         Scanner scanner = new Scanner(System.in);
+
 
         System.out.println("Vamos adicionar pessoas as equipes, veja a lista abaixo");
 
@@ -167,6 +201,43 @@ public class Main {
                 continueLoop = false;
             }
         }
+
+    }
+
+    public static void ShowAllInfo(ArrayList<Person> persons, ArrayList<Project> projects, ArrayList<Team> teams) {
+
+        System.out.println("Segue o compilado de todos os funcionarios, projetos e equipes");
+        System.out.println("Funcionários: ");
+        for (int i = 0; i < persons.size(); i++){
+            System.out.println("Nome: " + persons.get(i).getCompleteName());
+            System.out.println("CPF: " + persons.get(i).getCPF());
+            System.out.println("Email: " + persons.get(i).getEmail());
+            System.out.println("Login: " + persons.get(i).getLogin());
+            System.out.println("Password: " + persons.get(i).getPassword());
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println("Projetos: ");
+        for (int i = 0; i < projects.size(); i++){
+            System.out.println("Nome do projeto: " + projects.get(i).getProjectName());
+            System.out.println("Descrição do projeto:" + projects.get(i).getDescription());
+            System.out.println("Inicio do projeto: " + projects.get(i).getStartDate());
+            System.out.println("Fim do projeto: " + projects.get(i).getEndDate());
+            System.out.println("Status do projeto: " + projects.get(i).getStatus());
+        }
+
+        for (int i = 0; i < teams.size(); i++){
+            System.out.println("Nome da Equipe: " + teams.get(i).getTeamName());
+            System.out.println("Descrição da Equipe: " + teams.get(i).getDescription());
+            System.out.println("Membros da Equipe: ");
+            for (int j = 0; j < teams.get(i).getMembers().size(); j++){
+                System.out.println(teams.get(i).getMembers().get(j).getCompleteName());
+            }
+            System.out.println("");
+
+        }
+
+
 
     }
 
